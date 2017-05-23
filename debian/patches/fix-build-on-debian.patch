@@ -1,0 +1,18 @@
+--- a/Makefile
++++ b/Makefile
+@@ -69,12 +69,12 @@
+ 	go build -o test/checkseccomp/$@ $(PROJECT)/test/checkseccomp
+ 
+ ocid: .gopathok $(shell hack/find-godeps.sh $(GOPKGDIR) cmd/ocid $(PROJECT))
+-	$(GO) build -o $@ \
++	GOPATH=$(GOPATH):$(shell pwd) $(GO) build -o $@ \
+ 		-tags "$(BUILDTAGS)" \
+-		$(PROJECT)/cmd/ocid
++		./cmd/ocid
+ 
+ ocic: .gopathok $(shell hack/find-godeps.sh $(GOPKGDIR) cmd/ocic $(PROJECT))
+-	$(GO) build -o $@ $(PROJECT)/cmd/ocic
++	GOPATH=$(GOPATH):$(shell pwd) $(GO) build -o $@ $(PROJECT)/cmd/ocic
+ 
+ kpod: .gopathok $(shell hack/find-godeps.sh $(GOPKGDIR) cmd/kpod $(PROJECT))
+ 	$(GO) build -o $@ $(PROJECT)/cmd/kpod
